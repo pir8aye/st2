@@ -146,6 +146,23 @@ WF2 = workflows.Workflow(None, {'name': WF2_NAME, 'definition': WF2_YAML})
 WF2_EXEC = copy.deepcopy(MISTRAL_EXECUTION)
 WF2_EXEC['workflow_name'] = WF2_NAME
 
+# Data for the notify param
+NOTIFY = [
+    {
+        'type': 'st2',
+        'events': [
+            'WORKFLOW_SUCCEEDED',
+            'WORKFLOW_FAILED',
+            'WORKFLOW_CANCELLED',
+            'WORKFLOW_PAUSED',
+            'TASK_SUCCEEDED',
+            'TASK_FAILED',
+            'TASK_CANCELLED',
+            'TASK_PAUSED'
+        ]
+    }
+]
+
 
 @mock.patch.object(
     CUDPublisher,
@@ -269,7 +286,7 @@ class MistralRunnerTest(DbTestCase):
         }
 
         executions.ExecutionManager.create.assert_called_with(
-            WF1_NAME, workflow_input=workflow_input, env=env)
+            WF1_NAME, workflow_input=workflow_input, env=env, notify=NOTIFY)
 
     @mock.patch.object(
         workflows.WorkflowManager, 'list',
@@ -353,7 +370,7 @@ class MistralRunnerTest(DbTestCase):
         }
 
         executions.ExecutionManager.create.assert_called_with(
-            WF1_NAME, workflow_input=workflow_input, env=env)
+            WF1_NAME, workflow_input=workflow_input, env=env, notify=NOTIFY)
 
     @mock.patch.object(
         workflows.WorkflowManager, 'list',
@@ -428,7 +445,7 @@ class MistralRunnerTest(DbTestCase):
         }
 
         executions.ExecutionManager.create.assert_called_with(
-            WF1_NAME, workflow_input=workflow_input, env=env)
+            WF1_NAME, workflow_input=workflow_input, env=env, notify=NOTIFY)
 
     @mock.patch.object(
         workflows.WorkflowManager, 'list',
@@ -480,7 +497,7 @@ class MistralRunnerTest(DbTestCase):
         }
 
         executions.ExecutionManager.create.assert_called_with(
-            WF1_NAME, workflow_input=workflow_input, env=env)
+            WF1_NAME, workflow_input=workflow_input, env=env, notify=NOTIFY)
 
     @mock.patch.object(
         workflows.WorkflowManager, 'list',
@@ -534,7 +551,7 @@ class MistralRunnerTest(DbTestCase):
         }
 
         executions.ExecutionManager.create.assert_called_with(
-            WF1_NAME, workflow_input=workflow_input, env=env)
+            WF1_NAME, workflow_input=workflow_input, env=env, notify=NOTIFY)
 
     @mock.patch.object(
         workflows.WorkflowManager, 'list',
@@ -585,7 +602,7 @@ class MistralRunnerTest(DbTestCase):
         }
 
         executions.ExecutionManager.create.assert_called_with(
-            WF1_NAME, workflow_input=workflow_input, env=env)
+            WF1_NAME, workflow_input=workflow_input, env=env, notify=NOTIFY)
 
     @mock.patch.object(
         workflows.WorkflowManager, 'list',
@@ -637,7 +654,7 @@ class MistralRunnerTest(DbTestCase):
         }
 
         executions.ExecutionManager.create.assert_called_with(
-            WF1_NAME, workflow_input=workflow_input, env=env)
+            WF1_NAME, workflow_input=workflow_input, env=env, notify=NOTIFY)
 
     @mock.patch.object(
         workflows.WorkflowManager, 'list',
